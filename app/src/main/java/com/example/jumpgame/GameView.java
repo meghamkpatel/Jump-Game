@@ -2,6 +2,7 @@ package com.example.jumpgame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -31,15 +32,20 @@ public class GameView extends SurfaceView {
                 //TODO Auto-generated method stub
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
-                flappy.add(new Flappy(this, playerbmp, 50, 50));
+
             }
             public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3){
                 //TODO Auto-generated method stub
             }
+
         });
+        playerbmp = BitmapFactory.decodeResource(getResources(), R.drawable.flappy);
+        flappy.add(new Flappy(this, playerbmp, 50, 50));
     }
     @Override
     protected void onDraw(Canvas canvas){
-
+        for(Flappy f: flappy){
+            f.onDraw(canvas);
+        }
     }
 }

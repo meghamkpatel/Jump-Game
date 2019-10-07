@@ -38,7 +38,7 @@ public class Flappy {
             vspeed = -jumppower;
         }
     }
-    public onDraw(Canvas canvas){
+    public void onDraw(Canvas canvas){
         update();
         canvas.drawBitmap(bmp, x, y, null);
     }
