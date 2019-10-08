@@ -1,9 +1,12 @@
 package com.example.jumpgame;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -16,6 +19,7 @@ public class GameView extends SurfaceView {
     private SurfaceHolder holder;
 
     Bitmap playerbmp;
+    Bitmap background;
     private List<Flappy> flappy = new ArrayList<Flappy>();
 
     public GameView(Context context){
@@ -41,9 +45,18 @@ public class GameView extends SurfaceView {
         });
         playerbmp = BitmapFactory.decodeResource(getResources(), R.drawable.flappy);
         flappy.add(new Flappy(this, playerbmp, 50, 50));
+
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent e){
+        for(Flappy f: flappy){
+            f.ontouch();
+        }
+        return false;
     }
     @Override
     protected void onDraw(Canvas canvas){
+        canvas.drawColor(Color.CYAN);
         for(Flappy f: flappy){
             f.onDraw(canvas);
         }

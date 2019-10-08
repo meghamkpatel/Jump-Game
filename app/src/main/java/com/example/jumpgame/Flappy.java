@@ -10,7 +10,7 @@ public class Flappy {
     static int vspeed = 1;
     static int flappyHeight;
     static int flappyWidth;
-    static int jumppower;
+    static int jumppower = -30;
     Bitmap bmp;
     GameView gameview;
     public Flappy(GameView gameview, Bitmap bmp, int x, int y){
@@ -24,8 +24,11 @@ public class Flappy {
         checkGround();
     }
     public void checkGround(){
-        if(y > gameview.getHeight()-64-flappyHeight){
+        if(y < gameview.getHeight()-64-flappyHeight){
             vspeed+=gravity;
+            if(y > gameview.getHeight()-64-flappyHeight+vspeed){
+                vspeed = gameview.getHeight()-64-y-flappyHeight;
+            }
         }
         else if(vspeed>0){
             vspeed = 0;
@@ -34,8 +37,8 @@ public class Flappy {
         y+=vspeed;
     }
     public void ontouch(){
-        if(y<=gameview.getHeight()-64-flappyHeight){
-            vspeed = -jumppower;
+        if(y>=gameview.getHeight()-64-flappyHeight){
+            vspeed = jumppower;
         }
     }
     public void onDraw(Canvas canvas){
