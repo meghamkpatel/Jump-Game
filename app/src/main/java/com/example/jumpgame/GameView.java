@@ -17,9 +17,10 @@ import java.util.List;
 public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private SurfaceHolder holder;
-
+    public static int globalxSpeed =15;
     Bitmap playerbmp;
-    Bitmap background;
+    Bitmap coinbmp;
+    private List<Coin> coin = new ArrayList<Coin>();
     private List<Flappy> flappy = new ArrayList<Flappy>();
 
     public GameView(Context context){
@@ -45,7 +46,8 @@ public class GameView extends SurfaceView {
         });
         playerbmp = BitmapFactory.decodeResource(getResources(), R.drawable.flappy);
         flappy.add(new Flappy(this, playerbmp, 50, 50));
-
+        coinbmp = BitmapFactory.decodeResource(getResources(), R.drawable.coinsprite);
+        coin.add(new Coin(this, coinbmp, 50, 200));
     }
     @Override
     public boolean onTouchEvent(MotionEvent e){
@@ -59,6 +61,9 @@ public class GameView extends SurfaceView {
         canvas.drawColor(Color.CYAN);
         for(Flappy f: flappy){
             f.onDraw(canvas);
+        }
+        for(Coin c: coin){
+            c.onDraw(canvas);
         }
     }
 }
