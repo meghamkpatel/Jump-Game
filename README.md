@@ -14,4 +14,4 @@ Day6: Background not working,  began working on Coin class
 Day7: Keep working on Coin class
 Day8: Fix bugs, polish it, make it better
 
-![FJ] (
+![FJ1](Screenshot_1571023719.png) ![FJ2](Screenshot_1571023741.png) ![FJ3](Screenshot_1571023753.png)
