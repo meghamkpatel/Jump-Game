@@ -2,6 +2,8 @@ package com.example.jumpgame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+
 
 public class Flappy {
     static int x;
@@ -11,14 +13,27 @@ public class Flappy {
     static int flappyHeight;
     static int flappyWidth;
     static int jumppower = -30;
+
+    private int width,height;
+
+
+    Rect flap;
     Bitmap bmp;
     GameView gameview;
+    private int i;
+    private Coin coin;
+
     public Flappy(GameView gameview, Bitmap bmp, int x, int y){
         this.x = x;
         this.y = y;
         this.gameview = gameview;
         this.bmp = bmp;
-        flappyHeight = bmp.getHeight();
+
+        this.width = bmp.getWidth();
+        this.height = bmp.getHeight();
+
+        flappyHeight=bmp.getHeight();
+
     }
     public void update(){
         checkGround();
@@ -26,7 +41,7 @@ public class Flappy {
     public void checkGround(){
         if(y < gameview.getHeight()-64-flappyHeight){
             vspeed+=gravity;
-            if(y > gameview.getHeight()-64-flappyHeight+vspeed){
+            if(y > gameview.getHeight()-64-flappyHeight-vspeed){
                 vspeed = gameview.getHeight()-64-y-flappyHeight;
             }
         }
@@ -41,6 +56,11 @@ public class Flappy {
             vspeed = jumppower;
         }
     }
+    public Rect getBounds()
+    {
+        return new Rect(this.x,this.y,this.x+width,this.y+height);
+    }
+
     public void onDraw(Canvas canvas){
         update();
         canvas.drawBitmap(bmp, x, y, null);
